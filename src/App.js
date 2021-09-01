@@ -3,6 +3,8 @@ import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import OpportunityList from './components/OpportunityList';
+import OpportunityDetails from './components/OpportunityDetails';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -50,6 +52,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
+
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand>
@@ -57,8 +60,18 @@ class App extends React.Component {
           </Navbar.Brand>
         </Container>
       </Navbar>
-      <h1>Opportunities ----- Status ----- Sector</h1>
-      <OpportunityList opportunities={this.state.opportunities} addOpportunity={this._addOpportunity} deleteOpportunity={this._deleteOpportunity}/>
+      <Router>
+        <Route exact path='/'>
+          <h1>Opportunities ----- Status ----- Sector</h1>
+          <OpportunityList opportunities={this.state.opportunities} addOpportunity={this._addOpportunity} deleteOpportunity={this._deleteOpportunity}/>
+        </Route>
+        <Route exact path='/:opportunity_id'>
+          <Link to={`/`}>
+            <button type="button" >Back</button>
+          </Link>
+          <OpportunityDetails opportunities={this.state.opportunities}/>
+        </Route>
+      </Router>
       </div>
     );
   }
