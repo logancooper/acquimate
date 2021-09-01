@@ -44,7 +44,7 @@ class App extends React.Component {
   _deleteOpportunity = (id) => {
     this.setState({
       opportunities: this.state.opportunities.filter((opportunity) => {
-        return opportunity.id != id;
+        return opportunity.id !== id;
       })
     });
   }

@@ -9,6 +9,8 @@ const OpportunityDetails = (props) => {
             <p>Company Name: {opportunity.company_name}</p>
             <p>Company Sector: {opportunity.sector}</p>
             <p>Company Status: {opportunity.status}</p>
+            <h1>Financial Stats</h1>
+            <p>Revenue: N/A</p>
         </>
     );
 }
