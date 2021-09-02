@@ -12,6 +12,7 @@ This project was completed as a coding challenge for Insiten.
   <li>Styling was done with React-Bootstrap and a handful of custom CSS classes.</li>
   <li>Page navigation was implemented with React-Router-Dom</li>
   <li>Icon Art gathered from https://lineicons.com/</li>
+  <li>For this project I followed a task based source control branching policy, meaning each branch was focused on an individual task or related set of tasks. All work was pushed to Github where I created pull requests from the task branches back into main to ensure that I was merging work safely.</li>
 </ul>
 
 <h1>Features</h1>
