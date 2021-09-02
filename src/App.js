@@ -14,14 +14,32 @@ class App extends React.Component {
         {
           id: 1,
           company_name: 'Wendys',
-          sector: 'Food Service',
-          status: 'Researching'
+          sector: 'Restaurant',
+          status: 'Researching',
+          key_contact: 'wendy@wendys.com',
+          website: 'www.wendys.com',
+          twitter: 'wendys',
+          glassdoor: 'wendys',
+          linkedin: 'wendys',
+          revenue: 200000000,
+          number_of_employees: 5000,
+          ebitda: '??',
+          gross_margin: 50
         },
         {
           id: 2,
           company_name: 'Burger King',
-          sector: 'Food Service',
-          status: 'Approved'
+          sector: 'Restaurant',
+          status: 'Approved',
+          key_contact: 'theking@burgerking.com',
+          website: 'www.burgerking.com',
+          twitter: 'burgerking',
+          glassdoor: 'burgerking',
+          linkedin: 'burgerking',
+          revenue: 100000000,
+          number_of_employees: 4570,
+          ebitda: '??',
+          gross_margin: 30
         }
       ],
       idCounter: 3
@@ -39,6 +57,102 @@ class App extends React.Component {
       opportunities: [...this.state.opportunities, newOpportunity],
       idCounter: this.state.idCounter + 1
     });
+  };
+
+  _editCompanyDetails = (oppID, updatedName, updatedSector, updatedStatus, updatedContact, updatedWebsite) => {
+    //find opportunity in opportunityList by providedID
+    let editedOpportunities = this.state.opportunities;
+    for(let i = 0; i < editedOpportunities.length; i++)
+    {
+      if(editedOpportunities[i].id === oppID)
+      {
+        //change the appropriate fields and leave the unchanged fields alone
+        editedOpportunities[i] = {
+          id: editedOpportunities[i].id,
+          company_name: updatedName,
+          sector: updatedSector,
+          status: updatedStatus,
+          key_contact: updatedContact,
+          website: updatedWebsite,
+          twitter: editedOpportunities[i].twitter,
+          glassdoor: editedOpportunities[i].glassdoor,
+          linkedin: editedOpportunities[i].linkedin,
+          revenue: editedOpportunities[i].revenue,
+          number_of_employees: editedOpportunities[i].number_of_employees,
+          ebitda: editedOpportunities[i].ebitda,
+          gross_margin: editedOpportunities[i].gross_margin
+        }
+        //set state to edited opportunity list
+        this.setState({
+          opportunities: editedOpportunities
+        });
+        break;
+      }
+    }
+  };
+
+  _editCorporateRep = (oppID, updatedTwitter, updatedGlassdoor, updatedLinkedin) => {
+    //find opportunity in opportunityList by providedID
+    let editedOpportunities = this.state.opportunities;
+    for(let i = 0; i < editedOpportunities.length; i++)
+    {
+      if(editedOpportunities[i].id === oppID)
+      {
+        //change the appropriate fields and leave the unchanged fields alone
+        editedOpportunities[i] = {
+          id: editedOpportunities[i].id,
+          company_name: editedOpportunities[i].company_name,
+          sector: editedOpportunities[i].sector,
+          status: editedOpportunities[i].status,
+          key_contact: editedOpportunities[i].key_contact,
+          website: editedOpportunities[i].website,
+          twitter: updatedTwitter,
+          glassdoor: updatedGlassdoor,
+          linkedin: updatedLinkedin,
+          revenue: editedOpportunities[i].revenue,
+          number_of_employees: editedOpportunities[i].number_of_employees,
+          ebitda: editedOpportunities[i].ebitda,
+          gross_margin: editedOpportunities[i].gross_margin
+        }
+        //set state to edited opportunity list
+        this.setState({
+          opportunities: editedOpportunities
+        });
+        break;
+      }
+    }
+  };
+
+  _editFinancialStats = (oppID, updatedRevenue, updatedNumberOfEmployees, updatedEBITDA, updatedGrossMargin) => {
+    //find opportunity in opportunityList by providedID
+    let editedOpportunities = this.state.opportunities;
+    for(let i = 0; i < editedOpportunities.length; i++)
+    {
+      if(editedOpportunities[i].id === oppID)
+      {
+        //change the appropriate fields and leave the unchanged fields alone
+        editedOpportunities[i] = {
+          id: editedOpportunities[i].id,
+          company_name: editedOpportunities[i].company_name,
+          sector: editedOpportunities[i].sector,
+          status: editedOpportunities[i].status,
+          key_contact: editedOpportunities[i].key_contact,
+          website: editedOpportunities[i].website,
+          twitter: editedOpportunities[i].twitter,
+          glassdoor: editedOpportunities[i].glassdoor,
+          linkedin: editedOpportunities[i].linkedin,
+          revenue: updatedRevenue,
+          number_of_employees: updatedNumberOfEmployees,
+          ebitda: updatedEBITDA,
+          gross_margin: updatedGrossMargin
+        }
+        //set state to edited opportunity list
+        this.setState({
+          opportunities: editedOpportunities
+        });
+        break;
+      }
+    }
   };
 
   _deleteOpportunity = (id) => {
@@ -69,7 +183,7 @@ class App extends React.Component {
           <Link to={`/`}>
             <button type="button" >Back</button>
           </Link>
-          <OpportunityDetails opportunities={this.state.opportunities}/>
+          <OpportunityDetails opportunities={this.state.opportunities} editCompanyDetails={this._editCompanyDetails} editCorporateRep={this._editCorporateRep} editFinancialStats={this._editFinancialStats}/>
         </Route>
       </Router>
       </div>

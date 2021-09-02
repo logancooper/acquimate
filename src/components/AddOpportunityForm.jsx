@@ -30,17 +30,26 @@ const AddOpportunityForm = (props) => {
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
-                        <Form.Group className="" controlId="formOpportunityInput">
+                        <Form.Group>
                             <Form.Label>Enter Opportunity Name</Form.Label>
                             <Form.Control type="text" placeholder="Opportunity Name" ref={opportunityNameInput}/>
                         </Form.Group>
-                        <Form.Group className="" controlId="formOpportunityInput">
-                            <Form.Label>Enter Opportunity Sector</Form.Label>
-                            <Form.Control type="text" placeholder="Opportunity Sector" ref={opportunitySectorInput}/>
+                        <Form.Group>
+                            <Form.Label>Select Opportunity Sector</Form.Label>
+                            <Form.Select ref={opportunitySectorInput}>
+                                <option value="Restaurant">Restaurant</option>
+                                <option value="Financial">Financial</option>
+                                <option value="Software">Software</option>
+                            </Form.Select>
                         </Form.Group>
-                        <Form.Group className="" controlId="formOpportunityInput">
-                            <Form.Label>Enter Opportunity Status</Form.Label>
-                            <Form.Control type="text" placeholder="Opportunity Status" ref={opportunityStatusInput}/>
+                        <Form.Group>
+                            <Form.Label>Select Opportunity Status</Form.Label>
+                            <Form.Select ref={opportunityStatusInput}>
+                                <option value="Researching">Researching</option>
+                                <option value="Pending Approval">Pending Approval</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Declined">Declined</option>
+                            </Form.Select>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
