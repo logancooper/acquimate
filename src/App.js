@@ -24,7 +24,8 @@ class App extends React.Component {
           revenue: 200000000,
           number_of_employees: 5000,
           ebitda: '??',
-          gross_margin: 50
+          gross_margin: 50,
+          notes: ["Contacted Wendy on 5/8 via primary email, circling back next week."]
         },
         {
           id: 2,
@@ -39,7 +40,8 @@ class App extends React.Component {
           revenue: 100000000,
           number_of_employees: 4570,
           ebitda: '??',
-          gross_margin: 30
+          gross_margin: 30,
+          notes: ["Spoke with The King in person last week, the deal is sealed."]
         }
       ],
       idCounter: 3
@@ -51,7 +53,17 @@ class App extends React.Component {
       id: this.state.idCounter,
       company_name: opportunityName,
       sector: opportunitySector,
-      status: opportunityStatus
+      status: opportunityStatus,
+      key_contact: 'N/A',
+      website: 'N/A',
+      twitter: 'N/A',
+      glassdoor: 'N/A',
+      linkedin: 'N/A',
+      revenue: 'N/A',
+      number_of_employees: 'N/A',
+      ebitda: 'N/A',
+      gross_margin: 'N/A',
+      notes: []
     }
     this.setState({
       opportunities: [...this.state.opportunities, newOpportunity],
@@ -80,7 +92,8 @@ class App extends React.Component {
           revenue: editedOpportunities[i].revenue,
           number_of_employees: editedOpportunities[i].number_of_employees,
           ebitda: editedOpportunities[i].ebitda,
-          gross_margin: editedOpportunities[i].gross_margin
+          gross_margin: editedOpportunities[i].gross_margin,
+          notes: editedOpportunities[i].notes
         }
         //set state to edited opportunity list
         this.setState({
@@ -112,7 +125,8 @@ class App extends React.Component {
           revenue: editedOpportunities[i].revenue,
           number_of_employees: editedOpportunities[i].number_of_employees,
           ebitda: editedOpportunities[i].ebitda,
-          gross_margin: editedOpportunities[i].gross_margin
+          gross_margin: editedOpportunities[i].gross_margin,
+          notes: editedOpportunities[i].notes
         }
         //set state to edited opportunity list
         this.setState({
@@ -144,7 +158,8 @@ class App extends React.Component {
           revenue: updatedRevenue,
           number_of_employees: updatedNumberOfEmployees,
           ebitda: updatedEBITDA,
-          gross_margin: updatedGrossMargin
+          gross_margin: updatedGrossMargin,
+          notes: editedOpportunities[i].notes
         }
         //set state to edited opportunity list
         this.setState({
@@ -163,10 +178,42 @@ class App extends React.Component {
     });
   }
 
+  _addNote = (oppID, content) => {
+    //find opportunity in opportunityList by providedID
+    let editedOpportunities = this.state.opportunities;
+    for(let i = 0; i < editedOpportunities.length; i++)
+    {
+      if(editedOpportunities[i].id === oppID)
+      {
+        //change the appropriate fields and leave the unchanged fields alone
+        editedOpportunities[i] = {
+          id: editedOpportunities[i].id,
+          company_name: editedOpportunities[i].company_name,
+          sector: editedOpportunities[i].sector,
+          status: editedOpportunities[i].status,
+          key_contact: editedOpportunities[i].key_contact,
+          website: editedOpportunities[i].website,
+          twitter: editedOpportunities[i].twitter,
+          glassdoor: editedOpportunities[i].glassdoor,
+          linkedin: editedOpportunities[i].linkedin,
+          revenue: editedOpportunities[i].revenue,
+          number_of_employees: editedOpportunities[i].number_of_employees,
+          ebitda: editedOpportunities[i].ebitda,
+          gross_margin: editedOpportunities[i].gross_margin,
+          notes: [...editedOpportunities[i].notes, content]
+        }
+        //set state to edited opportunity list
+        this.setState({
+          opportunities: editedOpportunities
+        });
+        break;
+      }
+    }
+  }
+
   render() {
     return (
       <div className="App">
-
       <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand>
@@ -183,7 +230,13 @@ class App extends React.Component {
           <Link to={`/`}>
             <button type="button" >Back</button>
           </Link>
-          <OpportunityDetails opportunities={this.state.opportunities} editCompanyDetails={this._editCompanyDetails} editCorporateRep={this._editCorporateRep} editFinancialStats={this._editFinancialStats}/>
+          <OpportunityDetails 
+          opportunities={this.state.opportunities} 
+          editCompanyDetails={this._editCompanyDetails} 
+          editCorporateRep={this._editCorporateRep} 
+          editFinancialStats={this._editFinancialStats}
+          addNote={this._addNote}
+          />
         </Route>
       </Router>
       </div>
