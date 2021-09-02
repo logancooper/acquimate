@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
+import FetchIcon from "../Icons/search.svg";
 
 const FetchOpportunityForm = (props) => {
     
@@ -42,7 +43,8 @@ const FetchOpportunityForm = (props) => {
 
             <Button 
             onClick={handleOpen}
-            >BigPicture Fetch</Button>
+            variant="outline-info"
+            ><img src={FetchIcon} alt="fetch icon"/></Button>
         </>
     );
 }
