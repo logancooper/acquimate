@@ -1,5 +1,6 @@
 import OpportunityListEntry from "../components/OpportunityListEntry";
 import AddOpportunityForm from "./AddOpportunityForm";
+import FetchOpportunityForm from "./FetchOpportunityForm";
 
 const OpportunityList = (props) => {
     return (
@@ -10,6 +11,7 @@ const OpportunityList = (props) => {
                 />
             ))}
             <AddOpportunityForm addOpportunity={props.addOpportunity}/>
+            <FetchOpportunityForm fetchCompanyInfo={props.fetchCompanyInfo}/>
         </>
     );
 }

@@ -4,14 +4,14 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 
-const AddOpportunityForm = (props) => {
+const FetchOpportunityForm = (props) => {
     
     const [show, setShow] = useState(false);
-    let opportunityNameInput = React.createRef();
+    let domainInput = React.createRef();
 
     const _submitForm = (event) => {
         event.preventDefault();
-        props.addOpportunity(opportunityNameInput.current.value);
+        props.fetchCompanyInfo(domainInput.current.value);
         handleClose();
     }
 
@@ -24,27 +24,27 @@ const AddOpportunityForm = (props) => {
         <>
             <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Add Opportunity</Modal.Title>
+                    <Modal.Title>BigPicture Fetch</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Label>Enter Opportunity Name</Form.Label>
-                            <Form.Control type="text" placeholder="Opportunity Name" ref={opportunityNameInput}/>
+                            <Form.Label>Enter Opportunity Domain (www.companywebsite.com)</Form.Label>
+                            <Form.Control type="text" placeholder="Domain" ref={domainInput}/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-                    <Button onClick={_submitForm}>Add Opportunity</Button>
+                    <Button onClick={_submitForm}>BigPicture Fetch</Button>
                 </Modal.Footer>
             </Modal>
 
             <Button 
             onClick={handleOpen}
-            >Add Opportunity</Button>
+            >BigPicture Fetch</Button>
         </>
     );
 }
 
-export default AddOpportunityForm;
+export default FetchOpportunityForm;

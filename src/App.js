@@ -13,34 +13,36 @@ class App extends React.Component {
       opportunities: [
         {
           id: 1,
-          company_name: 'Wendys',
-          sector: 'Restaurant',
           status: 'Researching',
+          company_name: 'Wendys',
+          description: 'Fast Food Restaurant',
+          sector: 'Restaurant',
           key_contact: 'wendy@wendys.com',
           website: 'www.wendys.com',
+          hq_location: 'Dublin, OH',
           twitter: 'wendys',
-          glassdoor: 'wendys',
           linkedin: 'wendys',
+          facebook: 'wendys',
           revenue: 200000000,
           number_of_employees: 5000,
-          ebitda: '??',
-          gross_margin: 50,
+          market_cap: 100000,
           notes: ["Contacted Wendy on 5/8 via primary email, circling back next week."]
         },
         {
           id: 2,
-          company_name: 'Burger King',
-          sector: 'Restaurant',
           status: 'Approved',
+          company_name: 'Burger King',
+          description: 'The Burger Kings Palace',
+          sector: 'Restaurant',
           key_contact: 'theking@burgerking.com',
           website: 'www.burgerking.com',
+          hq_location: 'Dublin, OH',
           twitter: 'burgerking',
-          glassdoor: 'burgerking',
           linkedin: 'burgerking',
-          revenue: 100000000,
-          number_of_employees: 4570,
-          ebitda: '??',
-          gross_margin: 30,
+          facebook: 'burgerking',
+          revenue: 200000000,
+          number_of_employees: 5000,
+          market_cap: 100000,
           notes: ["Spoke with The King in person last week, the deal is sealed."]
         }
       ],
@@ -48,21 +50,61 @@ class App extends React.Component {
     }
   }
 
-  _addOpportunity = (opportunityName, opportunitySector, opportunityStatus) => {
+  _fetchCompanyInfo = async (domain) => {
+    const url = `https://company.bigpicture.io/v1/companies/find?domain=${domain}`;
+
+    const options = {
+      headers: {
+        Authorization: "0joRyl60Civ85VuImP9UAO:0QWeb3T4q4115Dq01lnpd4"
+      }
+    };
+
+    fetch(url, options)
+      .then( res => res.json() )
+      .then( data => {
+        console.log(data)
+
+        const newOpportunity = {
+          id: this.state.idCounter,
+          status: 'N/A',
+          company_name: data.legalName,
+          description: data.description,
+          sector: data.category.sector,
+          key_contact: 'N/A',
+          website: data.url,
+          hq_location: data.location,
+          twitter: data.twitter.handle,
+          linkedin: data.linkedin.handle,
+          facebook: data.facebook.handle,
+          revenue: data.metrics.annualRevenue,
+          number_of_employees: data.metrics.employees,
+          market_cap: data.metrics.marketCap,
+          notes: []
+        }
+        this.setState({
+          opportunities: [...this.state.opportunities, newOpportunity],
+          idCounter: this.state.idCounter + 1
+        });
+      
+      });
+  }
+
+  _addOpportunity = (opportunityName) => {
     const newOpportunity =         {
       id: this.state.idCounter,
+      status: 'N/A',
       company_name: opportunityName,
-      sector: opportunitySector,
-      status: opportunityStatus,
+      description: 'N/A',
+      sector: 'N/A',
       key_contact: 'N/A',
       website: 'N/A',
+      hq_location: 'N/A',
       twitter: 'N/A',
-      glassdoor: 'N/A',
       linkedin: 'N/A',
+      facebook: 'N/A',
       revenue: 'N/A',
       number_of_employees: 'N/A',
-      ebitda: 'N/A',
-      gross_margin: 'N/A',
+      market_cap: 'N/A',
       notes: []
     }
     this.setState({
@@ -71,7 +113,7 @@ class App extends React.Component {
     });
   };
 
-  _editCompanyDetails = (oppID, updatedName, updatedSector, updatedStatus, updatedContact, updatedWebsite) => {
+  _editCompanyDetails = (oppID, updatedName, updatedSector, updatedStatus, updatedContact, updatedWebsite, updatedDescription, updatedLocation) => {
     //find opportunity in opportunityList by providedID
     let editedOpportunities = this.state.opportunities;
     for(let i = 0; i < editedOpportunities.length; i++)
@@ -81,18 +123,19 @@ class App extends React.Component {
         //change the appropriate fields and leave the unchanged fields alone
         editedOpportunities[i] = {
           id: editedOpportunities[i].id,
-          company_name: updatedName,
-          sector: updatedSector,
           status: updatedStatus,
+          company_name: updatedName,
+          description: updatedDescription,
+          sector: updatedSector,
           key_contact: updatedContact,
           website: updatedWebsite,
+          hq_location: updatedLocation,
           twitter: editedOpportunities[i].twitter,
-          glassdoor: editedOpportunities[i].glassdoor,
           linkedin: editedOpportunities[i].linkedin,
+          facebook: editedOpportunities[i].facebook,
           revenue: editedOpportunities[i].revenue,
           number_of_employees: editedOpportunities[i].number_of_employees,
-          ebitda: editedOpportunities[i].ebitda,
-          gross_margin: editedOpportunities[i].gross_margin,
+          market_cap: editedOpportunities[i].market_cap,
           notes: editedOpportunities[i].notes
         }
         //set state to edited opportunity list
@@ -104,7 +147,7 @@ class App extends React.Component {
     }
   };
 
-  _editCorporateRep = (oppID, updatedTwitter, updatedGlassdoor, updatedLinkedin) => {
+  _editCorporateRep = (oppID, updatedTwitter, updatedFacebook, updatedLinkedin) => {
     //find opportunity in opportunityList by providedID
     let editedOpportunities = this.state.opportunities;
     for(let i = 0; i < editedOpportunities.length; i++)
@@ -114,18 +157,19 @@ class App extends React.Component {
         //change the appropriate fields and leave the unchanged fields alone
         editedOpportunities[i] = {
           id: editedOpportunities[i].id,
-          company_name: editedOpportunities[i].company_name,
-          sector: editedOpportunities[i].sector,
           status: editedOpportunities[i].status,
+          company_name: editedOpportunities[i].company_name,
+          description: editedOpportunities[i].description,
+          sector: editedOpportunities[i].sector,
           key_contact: editedOpportunities[i].key_contact,
           website: editedOpportunities[i].website,
+          hq_location: editedOpportunities[i].hq_location,
           twitter: updatedTwitter,
-          glassdoor: updatedGlassdoor,
           linkedin: updatedLinkedin,
+          facebook: updatedFacebook,
           revenue: editedOpportunities[i].revenue,
           number_of_employees: editedOpportunities[i].number_of_employees,
-          ebitda: editedOpportunities[i].ebitda,
-          gross_margin: editedOpportunities[i].gross_margin,
+          market_cap: editedOpportunities[i].market_cap,
           notes: editedOpportunities[i].notes
         }
         //set state to edited opportunity list
@@ -137,7 +181,7 @@ class App extends React.Component {
     }
   };
 
-  _editFinancialStats = (oppID, updatedRevenue, updatedNumberOfEmployees, updatedEBITDA, updatedGrossMargin) => {
+  _editFinancialStats = (oppID, updatedRevenue, updatedNumberOfEmployees, updatedMarketCap) => {
     //find opportunity in opportunityList by providedID
     let editedOpportunities = this.state.opportunities;
     for(let i = 0; i < editedOpportunities.length; i++)
@@ -147,18 +191,19 @@ class App extends React.Component {
         //change the appropriate fields and leave the unchanged fields alone
         editedOpportunities[i] = {
           id: editedOpportunities[i].id,
-          company_name: editedOpportunities[i].company_name,
-          sector: editedOpportunities[i].sector,
           status: editedOpportunities[i].status,
+          company_name: editedOpportunities[i].company_name,
+          description: editedOpportunities[i].description,
+          sector: editedOpportunities[i].sector,
           key_contact: editedOpportunities[i].key_contact,
           website: editedOpportunities[i].website,
+          hq_location: editedOpportunities[i].hq_location,
           twitter: editedOpportunities[i].twitter,
-          glassdoor: editedOpportunities[i].glassdoor,
           linkedin: editedOpportunities[i].linkedin,
+          facebook: editedOpportunities[i].facebook,
           revenue: updatedRevenue,
           number_of_employees: updatedNumberOfEmployees,
-          ebitda: updatedEBITDA,
-          gross_margin: updatedGrossMargin,
+          market_cap: updatedMarketCap,
           notes: editedOpportunities[i].notes
         }
         //set state to edited opportunity list
@@ -188,18 +233,19 @@ class App extends React.Component {
         //change the appropriate fields and leave the unchanged fields alone
         editedOpportunities[i] = {
           id: editedOpportunities[i].id,
-          company_name: editedOpportunities[i].company_name,
-          sector: editedOpportunities[i].sector,
           status: editedOpportunities[i].status,
+          company_name: editedOpportunities[i].company_name,
+          description: editedOpportunities[i].description,
+          sector: editedOpportunities[i].sector,
           key_contact: editedOpportunities[i].key_contact,
           website: editedOpportunities[i].website,
+          hq_location: editedOpportunities[i].hq_location,
           twitter: editedOpportunities[i].twitter,
-          glassdoor: editedOpportunities[i].glassdoor,
           linkedin: editedOpportunities[i].linkedin,
+          facebook: editedOpportunities[i].facebook,
           revenue: editedOpportunities[i].revenue,
           number_of_employees: editedOpportunities[i].number_of_employees,
-          ebitda: editedOpportunities[i].ebitda,
-          gross_margin: editedOpportunities[i].gross_margin,
+          market_cap: editedOpportunities[i].market_cap,
           notes: [...editedOpportunities[i].notes, content]
         }
         //set state to edited opportunity list
@@ -224,7 +270,12 @@ class App extends React.Component {
       <Router>
         <Route exact path='/'>
           <h1>Opportunities ----- Status ----- Sector</h1>
-          <OpportunityList opportunities={this.state.opportunities} addOpportunity={this._addOpportunity} deleteOpportunity={this._deleteOpportunity}/>
+          <OpportunityList 
+          opportunities={this.state.opportunities} 
+          addOpportunity={this._addOpportunity} 
+          deleteOpportunity={this._deleteOpportunity}
+          fetchCompanyInfo={this._fetchCompanyInfo}
+          />
         </Route>
         <Route exact path='/:opportunity_id'>
           <Link to={`/`}>

@@ -9,12 +9,11 @@ const EditFinancialStatsForm = (props) => {
     const [show, setShow] = useState(false);
     let editRevenueInput = React.createRef();
     let editNumEmployeesInput = React.createRef();
-    let editEBITDAInput = React.createRef();
-    let editGrossMarginInput = React.createRef();
+    let editMarketCap = React.createRef();
 
     const _submitForm = (event) => {
         event.preventDefault();
-        props.editFinancialStats(props.opportunity.id, editRevenueInput.current.value, editNumEmployeesInput.current.value, editEBITDAInput.current.value, editGrossMarginInput.current.value);
+        props.editFinancialStats(props.opportunity.id, editRevenueInput.current.value, editNumEmployeesInput.current.value, editMarketCap.current.value);
         handleClose();
     }
 
@@ -40,12 +39,8 @@ const EditFinancialStatsForm = (props) => {
                             <Form.Control type="number" defaultValue={props.opportunity.number_of_employees} ref={editNumEmployeesInput}/>
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Edit EBITDA</Form.Label>
-                            <Form.Control type="number" defaultValue={props.opportunity.ebitda} ref={editEBITDAInput}/>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Gross Margin</Form.Label>
-                            <Form.Control type="number" defaultValue={props.opportunity.gross_margin} ref={editGrossMarginInput}/>
+                            <Form.Label>Edit Market Cap</Form.Label>
+                            <Form.Control type="number" defaultValue={props.opportunity.market_cap} ref={editMarketCap}/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>

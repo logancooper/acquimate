@@ -7,15 +7,17 @@ import { useState } from "react";
 const EditCompanyDetailsForm = (props) => {
     
     const [show, setShow] = useState(false);
-    let opportunityEditNameInput = React.createRef();
-    let opportunityEditSectorInput = React.createRef();
-    let opportunityEditStatusInput = React.createRef();
-    let opportunityEditKeyContactInput = React.createRef();
-    let opportunityEditWebsiteInput = React.createRef();
+    let editNameInput = React.createRef();
+    let editSectorInput = React.createRef();
+    let editStatusInput = React.createRef();
+    let editKeyContactInput = React.createRef();
+    let editWebsiteInput = React.createRef();
+    let editDescriptionInput = React.createRef();
+    let editLocationInput = React.createRef();
 
     const _submitForm = (event) => {
         event.preventDefault();
-        props.editCompanyDetails(props.opportunity.id, opportunityEditNameInput.current.value, opportunityEditSectorInput.current.value, opportunityEditStatusInput.current.value, opportunityEditKeyContactInput.current.value, opportunityEditWebsiteInput.current.value);
+        props.editCompanyDetails(props.opportunity.id, editNameInput.current.value, editSectorInput.current.value, editStatusInput.current.value, editKeyContactInput.current.value, editWebsiteInput.current.value, editDescriptionInput.current.value, editLocationInput.current.value);
         handleClose();
     }
 
@@ -33,20 +35,12 @@ const EditCompanyDetailsForm = (props) => {
                 <Modal.Body>
                     <Form>
                         <Form.Group>
-                            <Form.Label>Edit Opportunity Name</Form.Label>
-                            <Form.Control type="text" defaultValue={props.opportunity.company_name} ref={opportunityEditNameInput}/>
-                        </Form.Group>
-                        <Form.Group>
-                            <Form.Label>Edit Sector</Form.Label>
-                            <Form.Select defaultValue={props.opportunity.sector} ref={opportunityEditSectorInput}>
-                                <option value="Restaurant">Restaurant</option>
-                                <option value="Financial">Financial</option>
-                                <option value="Software">Software</option>
-                            </Form.Select>
+                            <Form.Label>Edit Company Name</Form.Label>
+                            <Form.Control type="text" defaultValue={props.opportunity.company_name} ref={editNameInput}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Edit Status</Form.Label>
-                            <Form.Select defaultValue={props.opportunity.status} ref={opportunityEditStatusInput}>
+                            <Form.Select defaultValue={props.opportunity.status} ref={editStatusInput}>
                                 <option value="Researching">Researching</option>
                                 <option value="Pending Approval">Pending Approval</option>
                                 <option value="Approved">Approved</option>
@@ -54,12 +48,24 @@ const EditCompanyDetailsForm = (props) => {
                             </Form.Select>
                         </Form.Group>
                         <Form.Group>
+                            <Form.Label>Edit Description</Form.Label>
+                            <Form.Control type="text" defaultValue={props.opportunity.description} ref={editDescriptionInput}/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Edit Sector</Form.Label>
+                            <Form.Control type="text" defaultValue={props.opportunity.sector} ref={editSectorInput}/>
+                        </Form.Group>
+                        <Form.Group>
                             <Form.Label>Edit Key Contact</Form.Label>
-                            <Form.Control type="text" defaultValue={props.opportunity.key_contact} ref={opportunityEditKeyContactInput}/>
+                            <Form.Control type="text" defaultValue={props.opportunity.key_contact} ref={editKeyContactInput}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Edit Website</Form.Label>
-                            <Form.Control type="text" defaultValue={props.opportunity.website} ref={opportunityEditWebsiteInput}/>
+                            <Form.Control type="text" defaultValue={props.opportunity.website} ref={editWebsiteInput}/>
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Edit Location</Form.Label>
+                            <Form.Control type="text" defaultValue={props.opportunity.hq_location} ref={editLocationInput}/>
                         </Form.Group>
                     </Form>
                 </Modal.Body>
