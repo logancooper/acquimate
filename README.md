@@ -5,8 +5,8 @@ Deployed Link via Netlify: https://app.netlify.com/sites/cocky-mcclintock-a9ffca
 This project was completed as a coding challenge for Insiten.
 
 <h1>Screenshots</h1>
-![opportunity_list](./public/acquimate_1.png)
-![opportunity_details](./public/acquimate_2.png)
+![opportunitylist](/public/acquimate_1.png)
+![opportunitydetails](/public/acquimate_2.png)
 
 <h1>About</h1>
 <ul>
