@@ -55,7 +55,7 @@ const AddOpportunityForm = (props) => {
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-                    <Button onClick={_submitForm} data-testid="addOpportunityButton">Add Opportunity</Button>
+                    <Button onClick={_submitForm}>Add Opportunity</Button>
                 </Modal.Footer>
             </Modal>
 
