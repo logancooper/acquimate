@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
+import EditLogo from "../Icons/pencil-alt.svg";
+import "../styles/styles.css";
 
 const EditCompanyDetailsForm = (props) => {
     
@@ -36,7 +38,7 @@ const EditCompanyDetailsForm = (props) => {
                     <Form>
                         <Form.Group>
                             <Form.Label>Edit Company Name</Form.Label>
-                            <Form.Control type="text" defaultValue={props.opportunity.company_name} ref={editNameInput}/>
+                            <Form.Control type="text" defaultValue={props.opportunity.company_name} ref={editNameInput} required={true}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Edit Status</Form.Label>
@@ -77,7 +79,9 @@ const EditCompanyDetailsForm = (props) => {
 
             <Button 
             onClick={handleOpen}
-            >Edit Company Details</Button>
+            variant="novar"
+            className="editButton"
+            ><img src={EditLogo} alt="edit button"/></Button>
         </>
     );
 }

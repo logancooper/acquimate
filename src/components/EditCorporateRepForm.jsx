@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
+import EditLogo from "../Icons/pencil-alt.svg";
+import "../styles/styles.css";
 
 const EditCorporateRepForm = (props) => {
     
@@ -52,7 +54,8 @@ const EditCorporateRepForm = (props) => {
 
             <Button 
             onClick={handleOpen}
-            >Edit Corporate Reputation Information</Button>
+            variant="novar"
+            ><img src={EditLogo} alt="Edit Button"/></Button>
         </>
     );
 }

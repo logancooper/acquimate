@@ -5,6 +5,8 @@ import React from 'react';
 import OpportunityList from './components/OpportunityList';
 import OpportunityDetails from './components/OpportunityDetails';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import BackIcon from "./Icons/backward.svg";
+import Button from 'react-bootstrap/Button';
 
 class App extends React.Component {
   constructor(props) {
@@ -49,6 +51,10 @@ class App extends React.Component {
       idCounter: 3
     }
   }
+
+  componentDidMount() {
+    document.body.style.backgroundColor = "#282c34"
+}
 
   _fetchCompanyInfo = async (domain) => {
     const url = `https://company.bigpicture.io/v1/companies/find?domain=${domain}`;
@@ -260,16 +266,16 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-      <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand>
-            Acquimate
-          </Navbar.Brand>
-        </Container>
-      </Navbar>
+
       <Router>
         <Route exact path='/'>
-          <h1>Opportunities ----- Status ----- Sector</h1>
+          <Navbar bg="dark" variant="dark">
+            <Container>
+              <Navbar.Brand>
+                Acquimate
+              </Navbar.Brand>
+            </Container>
+          </Navbar>
           <OpportunityList 
           opportunities={this.state.opportunities} 
           addOpportunity={this._addOpportunity} 
@@ -278,9 +284,17 @@ class App extends React.Component {
           />
         </Route>
         <Route exact path='/:opportunity_id'>
-          <Link to={`/`}>
-            <button type="button" >Back</button>
-          </Link>
+
+          <Navbar bg="dark" variant="dark">
+            <Container>
+              <Navbar.Brand>
+                <Link to={`/`}>
+                  <Button variant="dark" ><img src={BackIcon} alt="Back Button"/></Button>
+                </Link>
+                Acquimate
+              </Navbar.Brand>
+            </Container>
+          </Navbar>
           <OpportunityDetails 
           opportunities={this.state.opportunities} 
           editCompanyDetails={this._editCompanyDetails} 

@@ -3,6 +3,8 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
+import PlusIcon from "../Icons/plus.svg";
+import "../styles/styles.css";
 
 const AddNoteForm = (props) => {
     
@@ -42,7 +44,9 @@ const AddNoteForm = (props) => {
 
             <Button 
             onClick={handleOpen}
-            >Add Note</Button>
+            className="editButton"
+            variant="novar"
+            ><img src={PlusIcon} alt="Add Button"/></Button>
         </>
     );
 }
