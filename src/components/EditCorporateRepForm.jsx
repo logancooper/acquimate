@@ -8,12 +8,12 @@ const EditCorporateRepForm = (props) => {
     
     const [show, setShow] = useState(false);
     let editTwitterInput = React.createRef();
-    let editGlassdoorInput = React.createRef();
+    let editFacebookInput = React.createRef();
     let editLinkedInInput = React.createRef();
 
     const _submitForm = (event) => {
         event.preventDefault();
-        props.editCorporateRep(props.opportunity.id, editTwitterInput.current.value, editGlassdoorInput.current.value, editLinkedInInput.current.value);
+        props.editCorporateRep(props.opportunity.id, editTwitterInput.current.value, editFacebookInput.current.value, editLinkedInInput.current.value);
         handleClose();
     }
 
@@ -35,8 +35,8 @@ const EditCorporateRepForm = (props) => {
                             <Form.Control type="text" defaultValue={props.opportunity.twitter} ref={editTwitterInput}/>
                         </Form.Group>
                         <Form.Group>
-                            <Form.Label>Edit Glassdoor</Form.Label>
-                            <Form.Control type="text" defaultValue={props.opportunity.glassdoor} ref={editGlassdoorInput}/>
+                            <Form.Label>Edit Facebook</Form.Label>
+                            <Form.Control type="text" defaultValue={props.opportunity.facebook} ref={editFacebookInput}/>
                         </Form.Group>
                         <Form.Group>
                             <Form.Label>Edit Linked-In</Form.Label>

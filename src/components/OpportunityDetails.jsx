@@ -11,25 +11,26 @@ const OpportunityDetails = (props) => {
         <>
             <h1>Company Details</h1>
             <p>Company Name: {opportunity.company_name}</p>
+            <p>Description: {opportunity.description}</p>
             <p>Company Sector: {opportunity.sector}</p>
             <p>Company Status: {opportunity.status}</p>
             <p>Key Contact: {opportunity.key_contact}</p>
             <p>Website: {opportunity.website}</p>
+            <p>HQ Location: {opportunity.hq_location}</p>
             <EditCompanyDetailsForm editCompanyDetails={props.editCompanyDetails} opportunity={opportunity}/>
             <br/>
             
             <h1>Corporate Reputation</h1>
             <p>Twitter: www.twitter.com/{opportunity.twitter}</p>
             <p>Linked-In: www.linkedin.com/{opportunity.linkedin}</p>
-            <p>Corporate Review: www.glassdoor.com/{opportunity.glassdoor}</p>
+            <p>Facebook: www.facebook.com/{opportunity.facebook}</p>
             <EditCorporateRepForm editCorporateRep={props.editCorporateRep} opportunity={opportunity}/>
             <br/>
             
             <h1>Financial Stats</h1>
             <p>Revenue: {opportunity.revenue}</p>
             <p>Number of Employees: {opportunity.number_of_employees}</p>
-            <p>EBITDA: {opportunity.ebitda}</p>
-            <p>Gross Margin: {opportunity.gross_margin}%</p>
+            <p>Market Cap: {opportunity.market_cap}</p>
             <EditFinancialStatsForm editFinancialStats={props.editFinancialStats} opportunity={opportunity}/>
             <br/>
             
