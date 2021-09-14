@@ -1,6 +1,6 @@
 # Acquimate
 
-Deployed Link via Netlify: https://app.netlify.com/sites/cocky-mcclintock-a9ffca/overview
+Deployed Link via Netlify: https://cocky-mcclintock-a9ffca.netlify.app
 
 This project was completed as a coding challenge for Insiten.
 
