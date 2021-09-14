@@ -1,3 +1,4 @@
+//Imports
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -6,19 +7,24 @@ import { useState } from "react";
 import EditLogo from "../Icons/pencil-alt.svg";
 import "../styles/styles.css";
 
+//Modal form for users to edit financial stats fields.
 const EditFinancialStatsForm = (props) => {
-    
+    //Show variable stored in state. Used to toggle the visibility of the modal.
     const [show, setShow] = useState(false);
+
+    //References to capture input
     let editRevenueInput = React.createRef();
     let editNumEmployeesInput = React.createRef();
     let editMarketCap = React.createRef();
 
+    //submitForm function that prevents default to prevent page reload, runs the provided editFinancialStats function from props, and closes the modal.
     const _submitForm = (event) => {
         event.preventDefault();
         props.editFinancialStats(props.opportunity.id, editRevenueInput.current.value, editNumEmployeesInput.current.value, editMarketCap.current.value);
         handleClose();
     }
 
+    //Handle open/close functions to toggle visibility of the modal.
     const handleClose = () => 
     {   setShow(false)
     };

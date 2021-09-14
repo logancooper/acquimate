@@ -1,3 +1,4 @@
+//Imports
 import { useParams } from "react-router-dom";
 import EditCompanyDetailsForm from './EditCompanyDetailsForm'
 import EditCorporateRepForm from './EditCorporateRepForm'
@@ -13,11 +14,19 @@ import { useState } from "react";
 import "../styles/styles.css";
 
 
-
+//Details Page component that controls and renders elements on the Opportunity Details page.
 const OpportunityDetails = (props) => {
+    
+    //ID of the opportunity in question, provided through useParams.
     const {opportunity_id} = useParams();
+    
+    //Get the current opportunity information by searching through all provided opportunities and matching against the provided ID.
     const opportunity = props.opportunities.find( (opportunity) => opportunity.id === parseInt(opportunity_id));
+    
+    //Variable store in state to control the visibility of the description text.
     const [descriptionTextOpen, setDescriptionTextOpen] = useState(false);
+    
+    //Render components and information about the opportunity.
     return (
         <>
         <Container>

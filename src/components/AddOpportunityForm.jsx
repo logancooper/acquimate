@@ -1,3 +1,4 @@
+//Imports
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -6,17 +7,21 @@ import { useState } from "react";
 import PlusIcon from "../Icons/plus.svg";
 import '../styles/styles.css'
 
+//Modal form on the opportunity list page that allows users to add a new opportunity
 const AddOpportunityForm = (props) => {
-    
+    //Show variable stored in state
     const [show, setShow] = useState(false);
+    //Reference to capture input
     let opportunityNameInput = React.createRef();
 
+    //Submit handler function. Prevents default to prevent page reload, then runs the provided addOpportunity function and closes.
     const _submitForm = (event) => {
         event.preventDefault();
         props.addOpportunity(opportunityNameInput.current.value);
         handleClose();
     }
-
+    
+    //Handle close/open functions. Sets the show variable to toggle the modal.
     const handleClose = () => 
     {   setShow(false)
     };

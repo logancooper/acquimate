@@ -1,3 +1,4 @@
+//Imports
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -6,9 +7,11 @@ import { useState } from "react";
 import EditLogo from "../Icons/pencil-alt.svg";
 import "../styles/styles.css";
 
+//Modal form on the opportunity details page that allows users to edit company details.
 const EditCompanyDetailsForm = (props) => {
-    
+    //Show variable stored in state
     const [show, setShow] = useState(false);
+    //References to capture input
     let editNameInput = React.createRef();
     let editSectorInput = React.createRef();
     let editStatusInput = React.createRef();
@@ -17,12 +20,13 @@ const EditCompanyDetailsForm = (props) => {
     let editDescriptionInput = React.createRef();
     let editLocationInput = React.createRef();
 
+    //submitform function that prevents the default behaviour of reloading the page, then runs the provided editCompanyDetails function and closes the modal.
     const _submitForm = (event) => {
         event.preventDefault();
         props.editCompanyDetails(props.opportunity.id, editNameInput.current.value, editSectorInput.current.value, editStatusInput.current.value, editKeyContactInput.current.value, editWebsiteInput.current.value, editDescriptionInput.current.value, editLocationInput.current.value);
         handleClose();
     }
-
+    //Handle close/open functions. Sets the show variable in state to toggle the visibility of the modal.
     const handleClose = () => 
     {   setShow(false)
     };

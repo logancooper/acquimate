@@ -1,3 +1,4 @@
+//Imports
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -6,19 +7,25 @@ import { useState } from "react";
 import EditLogo from "../Icons/pencil-alt.svg";
 import "../styles/styles.css";
 
+//Modal to allow users to edit coporate rep fields
 const EditCorporateRepForm = (props) => {
     
+    //show variable stored in state. Used to control the visibility of the modal.
     const [show, setShow] = useState(false);
+    
+    //References to capture input
     let editTwitterInput = React.createRef();
     let editFacebookInput = React.createRef();
     let editLinkedInInput = React.createRef();
-
+    
+    //submitForm function that prevents default to prevent page reload, runs the provided editCorporateRep function from props, the closes the modal.
     const _submitForm = (event) => {
         event.preventDefault();
         props.editCorporateRep(props.opportunity.id, editTwitterInput.current.value, editFacebookInput.current.value, editLinkedInInput.current.value);
         handleClose();
     }
-
+    
+    //Handle open/close functions. sets the show variable in state to toggle the visibility of the modal.
     const handleClose = () => 
     {   setShow(false)
     };

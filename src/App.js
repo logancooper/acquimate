@@ -1,3 +1,4 @@
+//Imports
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -8,9 +9,11 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import BackIcon from "./Icons/backward.svg";
 import Button from 'react-bootstrap/Button';
 
+//Main app class
 class App extends React.Component {
   constructor(props) {
     super(props);
+    //Set initial state with seeded opportunities data.
     this.state = {
       opportunities: [
         {
@@ -48,28 +51,32 @@ class App extends React.Component {
           notes: ["Spoke with The King in person last week, the deal is sealed."]
         }
       ],
+      //Counter to set ID of new opportunities (usually backend would do this)
       idCounter: 3
     }
   }
 
+  //Set the BG color of the document on mount
   componentDidMount() {
     document.body.style.backgroundColor = "#282c34"
-}
+  }
 
+  //fetchCompanyInfo function to fetch information from BigPicture API
   _fetchCompanyInfo = async (domain) => {
+    //Construct fetch URL
     const url = `https://company.bigpicture.io/v1/companies/find?domain=${domain}`;
-
+    //Set options with auth token
     const options = {
       headers: {
         Authorization: "0joRyl60Civ85VuImP9UAO:0QWeb3T4q4115Dq01lnpd4"
       }
     };
-
+    //Fetch
     fetch(url, options)
       .then( res => res.json() )
       .then( data => {
-        console.log(data)
-
+        //console.log(data)
+        //Create a new opportunity with the returned data
         const newOpportunity = {
           id: this.state.idCounter,
           status: 'N/A',
@@ -87,6 +94,7 @@ class App extends React.Component {
           market_cap: data.metrics.marketCap,
           notes: []
         }
+        //Add the new opportunity to the opportunities array in state, then increment the idCounter.
         this.setState({
           opportunities: [...this.state.opportunities, newOpportunity],
           idCounter: this.state.idCounter + 1
@@ -95,7 +103,9 @@ class App extends React.Component {
       });
   }
 
+  //AddOpportunity function, allows users to manually add a new opportunity to the list by providing a name.
   _addOpportunity = (opportunityName) => {
+    //Create a new opportunity with the provided name and ID from state
     const newOpportunity =         {
       id: this.state.idCounter,
       status: 'N/A',
@@ -113,12 +123,14 @@ class App extends React.Component {
       market_cap: 'N/A',
       notes: []
     }
+    //Add the new opportunity to the opportunities list and increments the ID counter.
     this.setState({
       opportunities: [...this.state.opportunities, newOpportunity],
       idCounter: this.state.idCounter + 1
     });
   };
 
+  //EditCompanyDetails function that allows users to update company details fields of a specific opportunity on the opportunity details page.
   _editCompanyDetails = (oppID, updatedName, updatedSector, updatedStatus, updatedContact, updatedWebsite, updatedDescription, updatedLocation) => {
     //find opportunity in opportunityList by providedID
     let editedOpportunities = this.state.opportunities;
@@ -153,6 +165,7 @@ class App extends React.Component {
     }
   };
 
+  //editCorporateRep function that allows users to update corporate rep fields of a specific opportunity on the opportunity details page.
   _editCorporateRep = (oppID, updatedTwitter, updatedFacebook, updatedLinkedin) => {
     //find opportunity in opportunityList by providedID
     let editedOpportunities = this.state.opportunities;
@@ -187,6 +200,7 @@ class App extends React.Component {
     }
   };
 
+  //editFinancialState function that allows users to update financial stats of a specific opportunity on the opportunity details page.
   _editFinancialStats = (oppID, updatedRevenue, updatedNumberOfEmployees, updatedMarketCap) => {
     //find opportunity in opportunityList by providedID
     let editedOpportunities = this.state.opportunities;
@@ -221,6 +235,7 @@ class App extends React.Component {
     }
   };
 
+  //deleteOpportunity function that allows users to delete an opportunity from the opportunity list page.
   _deleteOpportunity = (id) => {
     this.setState({
       opportunities: this.state.opportunities.filter((opportunity) => {
@@ -229,6 +244,7 @@ class App extends React.Component {
     });
   }
 
+  //addNote function that allows users to add a note to an opportunity. Notes are displayed on the opportunity details page.
   _addNote = (oppID, content) => {
     //find opportunity in opportunityList by providedID
     let editedOpportunities = this.state.opportunities;
@@ -263,6 +279,7 @@ class App extends React.Component {
     }
   }
 
+  //Renders the navbar, Opportunity List component, and Opportunity Details page conditionally within the Router.
   render() {
     return (
       <div className="App">

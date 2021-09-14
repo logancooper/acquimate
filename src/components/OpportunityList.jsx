@@ -1,3 +1,4 @@
+//Imports
 import OpportunityListEntry from "../components/OpportunityListEntry";
 import AddOpportunityForm from "./AddOpportunityForm";
 import FetchOpportunityForm from "./FetchOpportunityForm";
@@ -6,7 +7,8 @@ import Table from 'react-bootstrap/Table';
 import "../styles/styles.css";
 
 
-
+//Main list component of the Opportunity List page. Renders the table and maps through provided opportunities array to generate individual opportunity list entries.
+//Also renders the AddOpportunityForm and FetchOpportunityForm below the table for adding new opportunities to the list.
 const OpportunityList = (props) => {
     return (
         <>

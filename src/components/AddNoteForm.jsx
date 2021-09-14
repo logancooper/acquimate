@@ -1,3 +1,4 @@
+//Imports
 import React from "react";
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
@@ -6,18 +7,22 @@ import { useState } from "react";
 import PlusIcon from "../Icons/plus.svg";
 import "../styles/styles.css";
 
-//Modal form that shows/hides on the opportunity list page.
+//Modal form that shows/hides on the opportunity details page, allowing users to add a note.
 const AddNoteForm = (props) => {
-    
+    //Show variable stored in component state. Controls whether the modal is displayed or hidden.
     const [show, setShow] = useState(false);
+
+    //reference to capture the note input.
     let noteInput = React.createRef();
 
+    //submit form function. Prevents the default behavior to avoid reloading the page, then runs the provided addNote function and closes the modal.
     const _submitForm = (event) => {
         event.preventDefault();
         props.addNote(props.opportunity.id, noteInput.current.value);
         handleClose();
     }
 
+    //Handle Open/Close functions. Sets the show variable in state to false/true to toggle the modal.
     const handleClose = () => 
     {   setShow(false)
     };
