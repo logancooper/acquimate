@@ -6,6 +6,7 @@ import { useState } from "react";
 import PlusIcon from "../Icons/plus.svg";
 import "../styles/styles.css";
 
+//Modal form that shows/hides on the opportunity list page.
 const AddNoteForm = (props) => {
     
     const [show, setShow] = useState(false);
